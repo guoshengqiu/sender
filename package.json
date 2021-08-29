@@ -1,0 +1,21 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./bin/index.js",
+  "bin": {
+    "sender": "node ./bin/index.js"
+  },
+  "dependencies": {
+    "commander": "^8.1.0",
+    "concurrently": "^6.2.1",
+    "os": "^0.1.2",
+    "shelljs": "^0.8.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "sender": "node ./bin/index.js start"
+  },
+  "author": "Reber",
+  "license": "ISC"
+}
