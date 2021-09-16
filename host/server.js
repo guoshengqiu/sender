@@ -28,6 +28,7 @@ function httpServerStart(
     httpServer.on('error', onError)
 
     httpServer.listen(port, host, () => {
+      console.log(`${loginfo} http://${hostname}:${port}`)
       httpServer.removeListener('error', onError)
       resolve(port)
     })
