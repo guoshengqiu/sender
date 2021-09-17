@@ -12,7 +12,8 @@ Sender 一个可以将数据发送到电脑，电脑的数据也可以发到手�
 ## 特性
 1. 手机电脑互相传递数据
 2. 电脑端显示二维码，手机可以直接扫码打开网址
-3. 复制区的内容支持在电脑通过命令方式增删改查
+3. 发送的数据都在命令窗口上进行打印
+4. 复制区的内容支持在电脑通过命令方式增删改查
 
 
 ## 上手
@@ -40,12 +41,38 @@ Sender 一个可以将数据发送到电脑，电脑的数据也可以发到手�
 1. 一键启动服务端web端
  
     在根目录执行命令 `node inde.js dev`
-    如果报错提示端口被占用,那么添加一个自定义的端口即可
+    如果报错提示端口被占用，添加一个自定义的端口即可
    比如 `node inde.js dev 8100`
  
 2. web端修改
 
     在开发环境下,可以直接修改前端的代码,来达到目的
+
     复制区的内容只需要修改 'src/components/index.vue' 里面 data中的list即可
     开发环境下复制区的数据不会从服务端拉取，只需要在本地写好保存一下，web端就自动更新了
+
+## 集成到vconsole
+
+在代码中引入 `VConsoleSenderPlugin` 插件
+
+```
+import VConsole from 'vconsole'
+import VConsoleSenderPlugin from 'sender'
+const vConsole = new VConsole()
+const plugin = new VConsoleSenderPlugin(vConsole, 'http://192.168.x.xxx:8989/') // 传入connect-sender的网址即可
+
+```
+
+在vconsole上即可看到Sender模块
+
+## 操作流程
+
+1. `connect-sender start`生成的url 比如 `http://192.168.XX.XX:8989`
+2. 然后在浏览器上打开，在手机打开也可以
+3. 浏览器上打开支持手机扫码直接访问
+4. 在手机上，输入框中输入内容，然后点击发送，输入的内容将在电脑的命令面板上展示出来
+
+## 常见问题
+
+启动 `connect-sender start`报错提示没有权限，执行`sodu connect-sender start`即可
 

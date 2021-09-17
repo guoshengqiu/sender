@@ -9,6 +9,8 @@ const getPath = (url) => {
 }
 
 const serverPath = getPath('./server')
+const clientPath = getPath('./client')
+
 
 program
   .version(require('./package.json').version, '-v, --version')
@@ -31,6 +33,17 @@ const run = (port) => {
   })
 }
 
+// web端运行
+const runWeb = (port) => {
+  shell.exec(`
+    cd ${clientPath}
+    node ./bin.js start ${port}
+    `, function(error, stdout, stderr) {
+      console.log(error);
+  })
+}
+
+
 program.command('start [port]')
 	.action((port) => {
     if (port !== undefined) {
@@ -40,6 +53,20 @@ program.command('start [port]')
       }
     } else {
       run(defaultServerPort)
+    }
+  })
+  
+program.command('dev [port]')
+	.action((port) => {
+    if (port !== undefined) {
+      // 指定server的端口
+      if (typeof port === 'string') {
+        run(port)
+        runWeb(port)
+      }
+    } else {
+      run(defaultServerPort)
+      runWeb(defaultServerPort)
     }
 	})
 
