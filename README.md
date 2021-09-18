@@ -55,9 +55,11 @@ Sender 一个可以将数据发送到电脑，电脑的数据也可以发到手�
 
 在代码中引入 `VConsoleSenderPlugin` 插件
 
+安装 `npm i vconsole-sender-plugin -D`
+
 ```
 import VConsole from 'vconsole'
-import VConsoleSenderPlugin from 'sender'
+import VConsoleSenderPlugin from 'vconsole-sender-plugin'
 const vConsole = new VConsole()
 const plugin = new VConsoleSenderPlugin(vConsole, 'http://192.168.x.xxx:8989/') // 传入connect-sender的网址即可
 
